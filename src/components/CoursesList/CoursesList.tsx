@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 
 interface Props {
     searchPhrase: string;
+    refresh: number;
 }
 
-export const CoursesList = ({ searchPhrase }: Props) => {
+export const CoursesList = ({ searchPhrase, refresh }: Props) => {
 
     const [fullCoursesList, setFullCoursesList] = useState<SimpleCourseEntity[] | []>([]);
     const [filteredCourseList, setFilteredCourseList] = useState<SimpleCourseEntity[] | []>([]);
@@ -22,8 +23,8 @@ export const CoursesList = ({ searchPhrase }: Props) => {
 
                 setLoading(true)
                 const data = await api.getAllCourses();
-                setFullCoursesList(data)
-                setFilteredCourseList(data)
+                setFullCoursesList(data);
+                setFilteredCourseList(data);
             } catch (e: any) {
                 toast({
                     title: 'Błąd',
@@ -38,12 +39,12 @@ export const CoursesList = ({ searchPhrase }: Props) => {
 
 
         })()
-    }, []);
+    }, [refresh]);
 
     useEffect(() => {
         const searchResult = fullCoursesList.filter(course => {
             const courseNameToLowerCase = course.name.toLowerCase()
-            let searchValueToLowerCase = searchPhrase.toLowerCase()
+            const searchValueToLowerCase = searchPhrase.toLowerCase()
 
             return courseNameToLowerCase.includes(searchValueToLowerCase)
         });

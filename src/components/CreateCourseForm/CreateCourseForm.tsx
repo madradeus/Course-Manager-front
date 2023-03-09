@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, useState } from 'react';
+import React, { BaseSyntheticEvent, Dispatch, SetStateAction, useState } from 'react';
 import {
     Button,
     Drawer,
@@ -26,7 +26,12 @@ import { NewCourseEntity } from 'types';
 import { api } from "../../lib/Api";
 import { Loader } from "../common/Loader/Loader";
 
-export const CreateCourseForm = () => {
+
+interface Props {
+    doRefresh: Dispatch<SetStateAction<number>>
+}
+
+export const CreateCourseForm = ({ doRefresh }: Props) => {
 
     const { register, reset, formState: { errors }, handleSubmit } = useForm<NewCourseEntity>();
     const toast = useToast()
@@ -46,6 +51,7 @@ export const CreateCourseForm = () => {
                 duration: 3000,
                 position: "top-right"
             });
+            doRefresh(prevState => ++prevState)
         } catch (e) {
             toast({
                 title: 'Błąd',
@@ -57,8 +63,7 @@ export const CreateCourseForm = () => {
 
         } finally {
             setLoading(false);
-            onClose();
-            reset();
+            CloseAndClearForm();
         }
 
 

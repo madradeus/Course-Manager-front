@@ -114,7 +114,6 @@ export const CourseDetails = () => {
                                     >
                                     </Input>
                                 </FormLabel>
-
                             </Container>
                             <Container maxW='md'>
                                 <FormLabel htmlFor='isActive'>Aktywny:</FormLabel>
