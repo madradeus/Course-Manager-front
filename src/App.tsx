@@ -8,6 +8,8 @@ import { Route, Routes } from "react-router-dom";
 import { NotFoundView } from "./views/NotFoundView/NotFoundView";
 import { SingleCourseView } from "./views/SingleCourseView/SingleCourseView";
 import { DashboardView } from "./views/DashboardView/DashboardView";
+import { StudentsView } from "./views/StudentsView/StudentsView";
+import { SingleStudentView } from "./views/SingleStudentView/SingleStudentView";
 
 export function App() {
     return (
@@ -18,6 +20,8 @@ export function App() {
 
                 <Route path='/courses' element={<SimpleSidebar children={<CoursesView/>}/>}/>
                 <Route path='/courses/:id' element={<SimpleSidebar children={<SingleCourseView/>}/>}/>
+                <Route path='/students' element={<SimpleSidebar children={<StudentsView/>}/>}/>
+                <Route path='/students/:id' element={<SimpleSidebar children={<SingleStudentView/>}/>}/>
 
 
                 <Route path="*" element={<NotFoundView/>}/>
