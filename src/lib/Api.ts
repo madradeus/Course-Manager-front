@@ -1,4 +1,11 @@
-import { CourseEntity, NewCourseEntity, SimpleCourseEntity } from "types";
+import {
+    CourseEntity,
+    NewCourseEntity,
+    NewStudentEntity,
+    SimpleCourseEntity,
+    SimpleStudentEntity,
+    StudentEntity
+} from "types";
 import { apiUrl } from "../config/api";
 
 export class Api {
@@ -35,7 +42,7 @@ export class Api {
             throw new Error(res.statusText)
         }
 
-        return await res.json()
+        return await res.json() as string;
     }
 
     async changeActivity(id: string): Promise<void> {
@@ -46,8 +53,45 @@ export class Api {
             },
         });
         if ( res.status !== 200 ) {
+            throw new Error(res.statusText);
+        }
+    }
+
+    async getAllStudents(): Promise<SimpleStudentEntity[]> {
+        const res = await fetch(`${this.url}/students`);
+        if ( res.status !== 200 ) {
             throw new Error(res.statusText)
         }
+        return await res.json() as SimpleStudentEntity[];
+    }
+
+    async getStudent(id: string): Promise<StudentEntity | null> {
+        const res = await fetch(`${this.url}/students/${id}`);
+        if ( res.status !== 200 ) {
+            throw new Error(res.statusText)
+        }
+        const data = await res.json();
+        return data === null
+            ? null
+            : {
+                ...data,
+                dateOfBirth: new Date(data.dateOfBirth)
+            }
+    }
+
+    async addNewStudent(student: NewStudentEntity): Promise<string> {
+        const res = await fetch(`${this.url}/students`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(student)
+        });
+        if ( res.status !== 201 ) {
+            throw new Error(res.statusText)
+        }
+
+        return await res.json();
     }
 
 }
