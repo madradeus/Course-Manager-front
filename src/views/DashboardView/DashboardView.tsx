@@ -10,6 +10,7 @@ import {
     StatLabel,
     StatNumber
 } from "@chakra-ui/react";
+import { BirthdayList } from "../../BirthdayList/BirthdayList";
 
 export const DashboardView = () => {
     return (
@@ -39,32 +40,8 @@ export const DashboardView = () => {
 
                 </CardBody>
             </Card>
+            <BirthdayList/>
 
-            <Card>
-                <CardHeader>
-                    <Heading size='lg'>Dzisiaj obchodzą urodziny</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Stack direction={'row'} justifyContent={'space-evenly'}>
-                        <Stat flexGrow={0}>
-                            <StatLabel>Collected Fees</StatLabel>
-                            <StatNumber>£0.00</StatNumber>
-                            <StatHelpText>Feb 12 - Feb 28</StatHelpText>
-                        </Stat>
-                        <Stat flexGrow={0}>
-                            <StatLabel>Collected Fees</StatLabel>
-                            <StatNumber>£0.00</StatNumber>
-                            <StatHelpText>Feb 12 - Feb 28</StatHelpText>
-                        </Stat>
-                        <Stat flexGrow={0}>
-                            <StatLabel>Collected Fees</StatLabel>
-                            <StatNumber>£0.00</StatNumber>
-                            <StatHelpText>Feb 12 - Feb 28</StatHelpText>
-                        </Stat>
-                    </Stack>
-
-                </CardBody>
-            </Card>
 
 
         </Stack>

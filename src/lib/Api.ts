@@ -94,6 +94,15 @@ export class Api {
         return await res.json();
     }
 
+    async getBirthdayStudents(): Promise<SimpleStudentEntity[] | []> {
+        const res = await fetch(`${this.url}/students/birthday-students`);
+        if ( res.status !== 200 ) {
+            throw new Error(res.statusText)
+        }
+
+        return await res.json()
+    }
+
 }
 
 export const api = new Api();
