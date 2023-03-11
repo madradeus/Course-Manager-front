@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardBody, CardHeader, Container, Flex, FormLabel, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    Container,
+    Flex,
+    FormLabel,
+    Heading,
+    Stack,
+    Text,
+    useToast
+} from "@chakra-ui/react";
 import { StudentEntity } from 'types';
 import { Loader } from "../common/Loader/Loader";
 import { api } from "../../lib/Api";
@@ -13,7 +24,9 @@ export const StudentDetails = ({ id }: Props) => {
 
     const [student, setStudent] = useState<null | StudentEntity>(null);
     const [loading, setLoading] = useState(false);
-    
+
+    const toast = useToast();
+
 
     useEffect(() => {
         (async () => {
@@ -24,8 +37,14 @@ export const StudentDetails = ({ id }: Props) => {
                 }
                 const studentData = await api.getStudent(id);
                 setStudent(studentData);
-            } catch (e) {
-
+            } catch (e: any) {
+                toast({
+                    title: 'Błąd',
+                    description: 'Nie udało się przetworzyć żądania. Spróbuj ponownie',
+                    status: 'error',
+                    duration: 4000,
+                    position: "top-right"
+                });
             } finally {
                 setLoading(false);
             }
