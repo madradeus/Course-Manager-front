@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Card,
-    CardBody,
-    CardHeader,
-    Container,
-    Flex,
-    FormLabel,
-    Heading,
-    Stack,
-    Text,
-    useToast
-} from "@chakra-ui/react";
+import { Card, CardBody, CardHeader, Container, Flex, FormLabel, Heading, Text, useToast } from "@chakra-ui/react";
 import { StudentEntity } from 'types';
 import { Loader } from "../common/Loader/Loader";
 import { api } from "../../lib/Api";
@@ -56,10 +45,9 @@ export const StudentDetails = ({ id }: Props) => {
         return <Loader/>
     }
     return (
-        <Stack spacing={8}>
             <Card>
                 <CardHeader>
-                    <Heading>{student.firstName} {student.lastName} {student.gender === 'male' ? '♂' : '♀'}</Heading>
+                    <Heading>{student.firstName} {student.lastName} {student.gender === 'male' ? '🙎' : '👩🏼'}</Heading>
                 </CardHeader>
                 <CardBody>
                     <Flex>
@@ -79,16 +67,7 @@ export const StudentDetails = ({ id }: Props) => {
                 </CardBody>
             </Card>
 
-            <Card>
-                <CardHeader>
-                    <Heading size='lg'>Kursy użytkownika</Heading>
-                </CardHeader>
-                <CardBody>
 
-                </CardBody>
-            </Card>
-
-        </Stack>
 
     )
 };
