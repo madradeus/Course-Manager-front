@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader, Heading, useToast, } from "@chakra-ui/react";
-import { OneListItem } from "../../OneListItem/OneListItem";
+import { OneListItem } from "../OneListItem/OneListItem";
 import { SimpleStudentEntity } from 'types'
 import { api } from "../../lib/Api";
 import { Loader } from "../common/Loader/Loader";
@@ -17,7 +17,7 @@ export const StudentsList = ({ searchPhrase, refresh }: Props) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [filteredStudentList, setFilteredStudentList] = useState<SimpleStudentEntity[] | []>([]);
 
-    const toast = useToast()
+    const toast = useToast();
 
     useEffect(() => {
         (async () => {

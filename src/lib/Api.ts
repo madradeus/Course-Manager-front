@@ -1,7 +1,9 @@
 import {
     CourseEntity,
+    CourseOfStudent,
     NewCourseEntity,
     NewStudentEntity,
+    ParticipantOfCourse,
     SimpleCourseEntity,
     SimpleStudentEntity,
     StudentEntity
@@ -101,6 +103,29 @@ export class Api {
         }
 
         return await res.json()
+    }
+
+    async getCoursesOfStudent(studentId: string): Promise<CourseOfStudent[] | []> {
+        const res = await fetch(`${this.url}/studentsCourses/list-courses/${studentId}`);
+        if ( res.status !== 200 ) {
+            throw new Error()
+        }
+        return await res.json();
+
+    }
+
+    async getParticipantsOfCourse(courseId: string): Promise<ParticipantOfCourse[] | []> {
+        const res = await fetch(`${this.url}/studentsCourses/list-students/${courseId}`);
+        if ( res.status !== 200 ) {
+            throw new Error();
+        }
+        return await res.json();
+    }
+
+    async unsubscribeStudentFromCourse(subscriptionId: string): Promise<void> {
+        await fetch(`${this.url}/studentsCourses/${subscriptionId}`, {
+            method: 'DELETE'
+        })
     }
 
 }

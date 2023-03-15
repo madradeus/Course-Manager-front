@@ -10,7 +10,7 @@ import {
     StatLabel,
     StatNumber
 } from "@chakra-ui/react";
-import { BirthdayList } from "../../BirthdayList/BirthdayList";
+import { BirthdayList } from "../../components/BirthdayList/BirthdayList";
 
 export const DashboardView = () => {
     return (
