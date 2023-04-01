@@ -1,0 +1,16 @@
+.search {
+    width: 70%;
+    background-color: white;
+    border-radius: 5px;
+
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    position: sticky;
+    top: 10px;
+    z-index: 1;
+}

@@ -8,12 +8,13 @@ import { MobileNav } from "./MobileNav";
 interface LinkItemProps {
     name: string;
     icon: IconType;
+    url: string
 }
 
 export const LinkItems: Array<LinkItemProps> = [
-    { name: 'Pulpit', icon: FiTrendingUp },
-    { name: 'Kursy', icon: FiList },
-    { name: 'Kursanci', icon: FiUsers },
+    { name: 'Pulpit', icon: FiTrendingUp, url: 'dashboard' },
+    { name: 'Kursy', icon: FiList, url: 'courses' },
+    { name: 'Kursanci', icon: FiUsers, url: 'students' },
 ];
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {
