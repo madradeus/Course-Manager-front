@@ -1,9 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Card, CardBody, CardHeader, Container, Flex, FormLabel, Heading, Text, useToast } from "@chakra-ui/react";
-import { StudentEntity } from 'types';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    Container,
+    Flex,
+    FormLabel,
+    Heading,
+    Text,
+    useToast
+} from "@chakra-ui/react";
 import { Loader } from "../common/Loader/Loader";
-import { api } from "../../lib/Api";
-import { getAge } from "../utils/getAge";
+import { api } from "../../libs/Api";
+import { getAge } from "../../utils/getAge";
+import { StudentCoursesContext } from "../../contexts/StudentCoursesContext";
+import { DeleteUserButton } from '../DeleteUserButton/DeleteUserButton';
 
 interface Props {
     id?: string;
@@ -11,7 +23,8 @@ interface Props {
 
 export const StudentDetails = ({ id }: Props) => {
 
-    const [student, setStudent] = useState<null | StudentEntity>(null);
+    const { setStudent, student } = useContext(StudentCoursesContext);
+    // const [student, setStudent] = useState<null | StudentEntity>(null);
     const [loading, setLoading] = useState(false);
 
     const toast = useToast();
@@ -45,28 +58,31 @@ export const StudentDetails = ({ id }: Props) => {
         return <Loader/>
     }
     return (
-            <Card>
-                <CardHeader>
-                    <Heading>{student.firstName} {student.lastName} {student.gender === 'male' ? '🙎' : '👩🏼'}</Heading>
-                </CardHeader>
-                <CardBody>
-                    <Flex>
-                        <Container maxW='md'>
-                            <FormLabel>
-                                <Text fontWeight="bold" mb='8px'>Wiek: </Text>
-                            </FormLabel>
-                            <Text>{getAge(student.dateOfBirth)}</Text>
-                        </Container>
-                        <Container maxW='md'>
-                            <FormLabel>
-                                <Text fontWeight="bold">Adres email: </Text>
-                            </FormLabel>
-                            <Text>{student.emailAddress}</Text>
-                        </Container>
-                    </Flex>
-                </CardBody>
-            </Card>
+        <Card>
+            <CardHeader>
+                <Heading>{student.firstName} {student.lastName} {student.gender === 'male' ? '🙎' : '👩🏼'}</Heading>
+            </CardHeader>
+            <CardBody>
+                <Flex>
+                    <Container maxW='md'>
+                        <FormLabel>
+                            <Text fontWeight="bold" mb='8px'>Wiek: </Text>
+                        </FormLabel>
+                        <Text>{getAge(student.dateOfBirth)}</Text>
+                    </Container>
+                    <Container maxW='md'>
+                        <FormLabel>
+                            <Text fontWeight="bold">Adres email: </Text>
+                        </FormLabel>
+                        <Text>{student.emailAddress}</Text>
+                    </Container>
+                </Flex>
+            </CardBody>
+            <CardFooter justifyContent={'flex-end'}>
+                <DeleteUserButton id={id}/>
 
+            </CardFooter>
+        </Card>
 
 
     )

@@ -10,7 +10,7 @@ export const NotFoundView = () => {
             <h1> Upss! Chyba się zgubiłeś, synek? 🤨</h1>
             <h2>404 Not Found</h2>
             <Button size='lg' colorScheme="teal">
-                <Link to='/'>
+                <Link to='/dashboard'>
                     Wracam na stronę głowną
                 </Link>
 

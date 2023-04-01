@@ -22,8 +22,8 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import moment from "moment";
 import { useForm } from 'react-hook-form';
-import { NewCourseEntity } from 'types';
-import { api } from "../../lib/Api";
+import { NewCourseDto } from 'types';
+import { api } from "../../libs/Api";
 import { Loader } from "../common/Loader/Loader";
 
 
@@ -33,13 +33,13 @@ interface Props {
 
 export const CreateCourseForm = ({ doRefresh }: Props) => {
 
-    const { register, reset, formState: { errors }, handleSubmit } = useForm<NewCourseEntity>();
+    const { register, reset, formState: { errors }, handleSubmit } = useForm<NewCourseDto>();
     const toast = useToast()
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [loading, setLoading] = useState<boolean>(false);
 
 
-    const addCourse = async (e: BaseSyntheticEvent | undefined, data: NewCourseEntity) => {
+    const addCourse = async (e: BaseSyntheticEvent | undefined, data: NewCourseDto) => {
         e?.preventDefault();
         setLoading(true);
         try {

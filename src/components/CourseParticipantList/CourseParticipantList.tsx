@@ -3,9 +3,10 @@ import { Avatar, Card, CardBody, CardHeader, Flex, Heading, ListItem, OrderedLis
 
 import { ParticipantOfCourse } from 'types';
 import { Loader } from "../common/Loader/Loader";
-import { api } from "../../lib/Api";
+import { api } from "../../libs/Api";
 import { useParams } from "react-router-dom";
 import { UnsubscribeStudentButton } from "../UnsubscribeStudentButton/UnsubscribeStudentButton";
+import { AddParticipantForm } from "../AddParticipantForm/AddParticipantForm";
 
 
 export const CourseParticipantList = () => {
@@ -47,7 +48,10 @@ export const CourseParticipantList = () => {
     return (
         <Card>
             <CardHeader>
-                <Heading size='lg'>Lista uczestników</Heading>
+                <Flex justifyContent='space-between'>
+                    <Heading size='lg'>Lista uczestników</Heading>
+                    <AddParticipantForm participants={participants} refresh={setRefresh}/>
+                </Flex>
             </CardHeader>
             <CardBody>
                 <OrderedList spacing={5}>

@@ -17,8 +17,8 @@ import {
     useToast,
 } from "@chakra-ui/react";
 import { CourseOfStudent, ParticipantOfCourse } from 'types'
-import { api } from "../../lib/Api";
-import { Loader } from "../common/Loader/Loader";
+import { api } from "../../libs/Api";
+
 
 interface Props {
     participant?: ParticipantOfCourse;
@@ -43,7 +43,7 @@ export const UnsubscribeStudentButton = ({ participant, refresh, course }: Props
             refresh(prevState => ++prevState)
             toast({
                 title: 'Sukces',
-                description: 'Użytkownik został wypisany',
+                description: 'Uczestnik został wypisany',
                 status: 'success',
                 duration: 3000,
                 position: "top-right"
@@ -61,10 +61,6 @@ export const UnsubscribeStudentButton = ({ participant, refresh, course }: Props
         }
     }
 
-    if ( loading ) {
-        return <Loader/>
-    }
-
     return (
         <>
             <Menu>
@@ -75,19 +71,35 @@ export const UnsubscribeStudentButton = ({ participant, refresh, course }: Props
                     <MenuItem onClick={onOpen}>Wypisz</MenuItem>
                 </MenuList>
             </Menu>
-            <Modal isOpen={isOpen} onClose={onClose}>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered={true}>
                 <ModalOverlay/>
                 <ModalContent>
-                    <ModalHeader>Wypisz uczestnika</ModalHeader>
+                    <ModalHeader>Wypisać uczestnika?</ModalHeader>
                     <ModalCloseButton/>
                     <ModalBody>
                         <Text>Czy napewno wypisać uczestnika z kursu? </Text>
                     </ModalBody>
                     <ModalFooter>
                         <Button variant='ghost' onClick={onClose}>Anuluj</Button>
-                        <Button colorScheme='red' ml={3} onClick={confirmUnsubscription}>
-                            Wypisz
-                        </Button>
+                        {
+                            !loading
+                                ?
+                                <Button
+                                    colorScheme='red'
+                                    ml={3}
+                                    onClick={confirmUnsubscription}
+                                >
+                                    Wypisz
+                                </Button>
+                                :
+                                <Button
+                                    isLoading
+                                    loadingText='Wypisz'
+                                    colorScheme='red'
+                                    variant='outline'
+                                    spinnerPlacement='start'
+                                />
+                        }
                     </ModalFooter>
                 </ModalContent>
             </Modal>

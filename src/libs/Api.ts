@@ -1,11 +1,12 @@
 import {
     CourseEntity,
     CourseOfStudent,
-    NewCourseEntity,
-    NewStudentEntity,
+    NewCourseDto,
+    NewStudentDto,
     ParticipantOfCourse,
     SimpleCourseEntity,
     SimpleStudentEntity,
+    StudentCourseDto,
     StudentEntity
 } from "types";
 import { apiUrl } from "../config/api";
@@ -31,7 +32,7 @@ export class Api {
         return await res.json() as CourseEntity | null;
     }
 
-    async addNewCourse(course: NewCourseEntity): Promise<string> {
+    async addNewCourse(course: NewCourseDto): Promise<string> {
 
         const res = await fetch(`${this.url}/courses`, {
             method: 'POST',
@@ -81,7 +82,7 @@ export class Api {
             }
     }
 
-    async addNewStudent(student: NewStudentEntity): Promise<string> {
+    async addNewStudent(student: NewStudentDto): Promise<string> {
         const res = await fetch(`${this.url}/students`, {
             method: 'POST',
             headers: {
@@ -122,10 +123,39 @@ export class Api {
         return await res.json();
     }
 
+    //@TODO połączyć te 2 metody
+
     async unsubscribeStudentFromCourse(subscriptionId: string): Promise<void> {
-        await fetch(`${this.url}/studentsCourses/${subscriptionId}`, {
+        const res = await fetch(`${this.url}/studentsCourses/${subscriptionId}`, {
             method: 'DELETE'
         })
+        if ( res.status !== 200 ) {
+            throw new Error(res.statusText)
+        }
+    }
+
+    async subscribeStudent(studentCourse: StudentCourseDto): Promise<void> {
+
+        const res = await fetch(`${this.url}/studentsCourses`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(studentCourse)
+        })
+        if ( res.status !== 201 ) {
+            throw new Error(res.statusText)
+        }
+    }
+
+    async deleteStudent(id: string): Promise<void> {
+        const res = await fetch(`${this.url}/students/${id}`, {
+            method: "DELETE"
+        })
+
+        if ( res.status !== 204 ) {
+            throw new Error
+        }
     }
 
 }

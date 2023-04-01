@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Badge, Button, Card, CardBody, CardFooter, Heading, Stack, Text, useToast } from "@chakra-ui/react";
-import { api } from "../../lib/Api";
+import { api } from "../../libs/Api";
 import { Loader } from "../common/Loader/Loader";
 import { SimpleCourseEntity } from 'types';
 import { Link } from "react-router-dom";

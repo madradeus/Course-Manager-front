@@ -20,10 +20,9 @@ import {
     useToast
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { NewStudentEntity } from 'types';
+import { NewStudentDto } from 'types';
 import moment from "moment";
-import { Loader } from "../common/Loader/Loader";
-import { api } from "../../lib/Api";
+import { api } from "../../libs/Api";
 
 
 interface Props {
@@ -33,8 +32,8 @@ interface Props {
 export const CreateStudentForm = ({ doRefresh }: Props) => {
 
 
-    const { register, reset, formState: { errors }, handleSubmit } = useForm<NewStudentEntity>();
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { register, reset, formState: { errors }, handleSubmit } = useForm<NewStudentDto>();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const [loading, setLoading] = useState<boolean>(false);
     const toast = useToast();
 
@@ -71,9 +70,6 @@ export const CreateStudentForm = ({ doRefresh }: Props) => {
     const CloseAndClearForm = () => {
         onClose();
         reset();
-    }
-    if ( loading ) {
-        return <Loader/>
     }
     return (
         <>
@@ -179,9 +175,22 @@ export const CreateStudentForm = ({ doRefresh }: Props) => {
                         </ModalBody>
                         <ModalFooter>
                             <Button variant='ghost' onClick={CloseAndClearForm}>Anuluj </Button>
-                            <Button colorScheme='blue' mr={3} type='submit'>
-                                Zapisz
-                            </Button>
+                            {
+                                !loading
+                                    ?
+                                    <Button colorScheme='blue' ml={3} type='submit'>
+                                        Zapisz
+                                    </Button>
+                                    :
+                                    <Button
+                                        isLoading
+                                        loadingText='Zapisz'
+                                        colorScheme='blue'
+                                        variant='outline'
+                                        spinnerPlacement='start'
+                                    />
+                            }
+
                         </ModalFooter>
                     </form>
                 </ModalContent>

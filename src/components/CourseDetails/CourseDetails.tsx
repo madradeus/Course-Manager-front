@@ -17,7 +17,7 @@ import {
     Text,
     useToast
 } from "@chakra-ui/react";
-import { api } from "../../lib/Api";
+import { api } from "../../libs/Api";
 import { Loader } from "../common/Loader/Loader";
 import { CourseEntity } from 'types';
 import moment from "moment";
@@ -25,7 +25,7 @@ import { NotFoundView } from "../../views/NotFoundView/NotFoundView";
 
 export const CourseDetails = () => {
 
-    const [course, setCourse] = useState<CourseEntity | null>(null);
+    const [course, setCourse] = useState<CourseEntity | undefined | null>(undefined);
     const [loading, setLoading] = useState<boolean>(false);
     const [refresh, setRefresh] = useState<number>(0);
 
@@ -56,11 +56,11 @@ export const CourseDetails = () => {
     }, [refresh]);
 
     const changeActivity = async () => {
+        setLoading(true);
         try {
             await api.changeActivity(id);
             setRefresh(prevState => ++prevState);
         } catch (e: any) {
-            console.log(e.message)
             toast({
                 title: 'Błąd',
                 description: e.message,
@@ -68,14 +68,16 @@ export const CourseDetails = () => {
                 duration: 3000,
                 position: "top-right"
             });
+            setLoading(false);
 
         }
 
     }
 
-    if ( loading ) {
+    if ( course === undefined ) {
         return <Loader/>
     }
+
     if ( course === null ) {
         return (
             <NotFoundView/>
@@ -90,9 +92,9 @@ export const CourseDetails = () => {
                         {course.name}
                         {course.isActive
                             ?
-                            <Badge className='chips' colorScheme='green'>Aktywny</Badge>
+                            <Badge className='chips' ml={4} colorScheme='green'>Aktywny</Badge>
                             :
-                            <Badge className='chips' colorScheme='red'>Nieaktywny</Badge>
+                            <Badge className='chips' ml={4} colorScheme='red'>Nieaktywny</Badge>
 
                         }
                     </Heading>
@@ -117,7 +119,7 @@ export const CourseDetails = () => {
                             </Container>
                             <Container maxW='md'>
                                 <FormLabel htmlFor='isActive'>Aktywny:</FormLabel>
-                                <Switch defaultChecked={course.isActive} disabled/>
+                                <Switch isChecked={course.isActive} disabled/>
                             </Container>
                         </Flex>
                         <CardFooter justifyContent={'flex-end'}>
@@ -126,8 +128,21 @@ export const CourseDetails = () => {
                                     Anuluj
                                 </Link>
                             </Button>
-                            <Button onClick={changeActivity}
-                                    colorScheme='red'>{course.isActive ? 'Dezaktywuj' : 'Aktywuj'}</Button>
+                            {
+                                !loading
+                                    ?
+                                    <Button onClick={changeActivity}
+                                            colorScheme='red'>{course.isActive ? 'Dezaktywuj' : 'Aktywuj'}
+                                    </Button>
+                                    :
+                                    <Button
+                                        isLoading
+                                        loadingText={course.isActive ? 'Dezaktywuj' : 'Aktywuj'}
+                                        colorScheme='red'
+                                        variant='outline'
+                                        spinnerPlacement='start'
+                                    />
+                            }
                         </CardFooter>
 
                     </Stack>

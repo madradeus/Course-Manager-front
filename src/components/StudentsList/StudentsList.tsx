@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader, Heading, useToast, } from "@chakra-ui/react";
 import { OneListItem } from "../OneListItem/OneListItem";
 import { SimpleStudentEntity } from 'types'
-import { api } from "../../lib/Api";
+import { api } from "../../libs/Api";
 import { Loader } from "../common/Loader/Loader";
 
 interface Props {

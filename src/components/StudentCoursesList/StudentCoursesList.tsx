@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader, Flex, Heading, ListItem, UnorderedList, useToast } from "@chakra-ui/react";
-import { CourseOfStudent } from 'types'
-import { api } from "../lib/Api";
-import { Loader } from "../components/common/Loader/Loader";
-import { UnsubscribeStudentButton } from "../components/UnsubscribeStudentButton/UnsubscribeStudentButton";
+import { api } from "../../libs/Api";
+import { Loader } from "../common/Loader/Loader";
+import { UnsubscribeStudentButton } from "../UnsubscribeStudentButton/UnsubscribeStudentButton";
+import { SubscribeForm } from "../SubscribeForm/SubscribeForm";
+import { StudentCoursesContext } from "../../contexts/StudentCoursesContext";
 
 interface Props {
     id?: string;
@@ -11,7 +12,7 @@ interface Props {
 
 export const StudentCoursesList = ({ id }: Props) => {
 
-    const [studentCourses, setStudentCourses] = useState<CourseOfStudent[] | []>([]);
+    const { studentCourses, setStudentCourses } = useContext(StudentCoursesContext);
     const [loading, setLoading] = useState(false);
     const [refresh, setRefresh] = useState<number>(0);
 
@@ -46,7 +47,13 @@ export const StudentCoursesList = ({ id }: Props) => {
     return (
         <Card>
             <CardHeader>
-                <Heading size='lg'>Kursy użytkownika</Heading>
+                <Flex justifyContent='space-between'>
+                    <Heading size='lg'>
+                        Lista kursów
+                    </Heading>
+                    <SubscribeForm refresh={setRefresh}/>
+                </Flex>
+
             </CardHeader>
             <CardBody>
                 <UnorderedList spacing={5}>
