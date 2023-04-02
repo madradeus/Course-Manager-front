@@ -1,6 +1,7 @@
 import {
     CourseEntity,
     CourseOfStudent,
+    LoginUserDto,
     NewCourseDto,
     NewStudentDto,
     ParticipantOfCourse,
@@ -15,7 +16,9 @@ export class Api {
     private url: string = apiUrl;
 
     async getAllCourses(): Promise<SimpleCourseEntity[] | []> {
-        const res = await fetch(`${this.url}/courses`);
+        const res = await fetch(`${this.url}/courses`, {
+            credentials: "include"
+        });
         if ( res.status !== 200 ) {
             throw new Error(res.statusText);
         }
@@ -23,7 +26,9 @@ export class Api {
     }
 
     async getCourse(courseId: string): Promise<CourseEntity | null> {
-        const res = await fetch(`${this.url}/courses/${courseId}`);
+        const res = await fetch(`${this.url}/courses/${courseId}`, {
+            credentials: "include"
+        });
         if ( res.status !== 200 ) {
             throw new Error(res.statusText);
         }
@@ -37,6 +42,7 @@ export class Api {
                 'content-type': 'application/json',
             },
             body: JSON.stringify(course),
+            credentials: "include"
         })
         if ( res.status !== 201 ) {
             throw new Error(res.statusText);
@@ -51,6 +57,7 @@ export class Api {
             headers: {
                 'content-type': 'application/json',
             },
+            credentials: "include",
         });
         if ( res.status !== 200 ) {
             throw new Error(res.statusText);
@@ -58,7 +65,9 @@ export class Api {
     }
 
     async getAllStudents(): Promise<SimpleStudentEntity[]> {
-        const res = await fetch(`${this.url}/students`);
+        const res = await fetch(`${this.url}/students`, {
+            credentials: "include"
+        });
         if ( res.status !== 200 ) {
             throw new Error(res.statusText);
         }
@@ -66,7 +75,9 @@ export class Api {
     }
 
     async getStudent(id: string): Promise<StudentEntity | null> {
-        const res = await fetch(`${this.url}/students/${id}`);
+        const res = await fetch(`${this.url}/students/${id}`, {
+            credentials: "include"
+        });
         if ( res.status !== 200 ) {
             throw new Error(res.statusText);
         }
@@ -85,7 +96,8 @@ export class Api {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(student)
+            body: JSON.stringify(student),
+            credentials: "include",
         });
         if ( res.status !== 201 ) {
             throw new Error(res.statusText);
@@ -95,7 +107,9 @@ export class Api {
     }
 
     async getBirthdayStudents(): Promise<SimpleStudentEntity[] | []> {
-        const res = await fetch(`${this.url}/students/birthday-students`);
+        const res = await fetch(`${this.url}/students/birthday-students`, {
+            credentials: "include"
+        });
         if ( res.status !== 200 ) {
             throw new Error(res.statusText);
         }
@@ -104,7 +118,9 @@ export class Api {
     }
 
     async getCoursesOfStudent(studentId: string): Promise<CourseOfStudent[] | []> {
-        const res = await fetch(`${this.url}/studentsCourses/list-courses/${studentId}`);
+        const res = await fetch(`${this.url}/studentsCourses/list-courses/${studentId}`, {
+            credentials: "include"
+        });
         if ( res.status !== 200 ) {
             throw new Error();
         }
@@ -113,7 +129,9 @@ export class Api {
     }
 
     async getParticipantsOfCourse(courseId: string): Promise<ParticipantOfCourse[] | []> {
-        const res = await fetch(`${this.url}/studentsCourses/list-students/${courseId}`);
+        const res = await fetch(`${this.url}/studentsCourses/list-students/${courseId}`, {
+            credentials: "include"
+        });
         if ( res.status !== 200 ) {
             throw new Error();
         }
@@ -122,7 +140,8 @@ export class Api {
 
     async unsubscribeStudentFromCourse(subscriptionId: string): Promise<void> {
         const res = await fetch(`${this.url}/studentsCourses/${subscriptionId}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            credentials: "include",
         })
         if ( res.status !== 200 ) {
             throw new Error(res.statusText);
@@ -135,7 +154,8 @@ export class Api {
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringify(studentCourse)
+            body: JSON.stringify(studentCourse),
+            credentials: "include",
         })
         if ( res.status !== 201 ) {
             throw new Error(res.statusText);
@@ -144,7 +164,8 @@ export class Api {
 
     async deleteStudent(id: string): Promise<void> {
         const res = await fetch(`${this.url}/students/${id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            credentials: "include",
         })
 
         if ( res.status !== 204 ) {
@@ -152,6 +173,30 @@ export class Api {
         }
     }
 
+    async login(user: LoginUserDto): Promise<void> {
+        const res = await fetch(`${this.url}/auth/login`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(user),
+            credentials: "include"
+        });
+        if ( res.status !== 200 ) {
+            throw new Error('Nie udało się zalogować')
+        }
+    }
+
+    //@TODO dorobić zwrotkę
+
+    async logout(): Promise<void> {
+        const res = await fetch(`${this.url}/auth/logout`, {
+            credentials: "include"
+        });
+        if ( res.status !== 200 ) {
+            throw new Error('Nie udało się wylogować')
+        }
+    }
 }
 
 export const api = new Api();

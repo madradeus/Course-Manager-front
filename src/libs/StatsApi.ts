@@ -5,7 +5,9 @@ class StatsApi {
     url: string = `${apiUrl}/stats`;
 
     async getActiveCoursesNumber(): Promise<GetNumberOfActiveCoursesResponse> {
-        const res = await fetch(`${this.url}/active-courses`);
+        const res = await fetch(`${this.url}/active-courses`, {
+            credentials: "include",
+        });
         if ( res.status !== 200 ) {
             throw new Error();
         }
@@ -13,7 +15,9 @@ class StatsApi {
     }
 
     async getActiveStudentsNumber(): Promise<GetActiveStudentsNumberResponse> {
-        const res = await fetch(`${this.url}/active-students`);
+        const res = await fetch(`${this.url}/active-students`, {
+            credentials: "include",
+        });
         if ( res.status !== 200 ) {
             throw new Error();
         }
@@ -21,7 +25,9 @@ class StatsApi {
     }
 
     async getAvgFrequency(): Promise<GetTotalAvgFrequencyResponse> {
-        const res = await fetch(`${this.url}/avg-frequency`);
+        const res = await fetch(`${this.url}/avg-frequency`, {
+            credentials: "include",
+        });
         if ( res.status !== 200 ) {
             throw new Error();
         }
