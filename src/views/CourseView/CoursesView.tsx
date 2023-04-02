@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { TopListSearch } from "../../components/common/TopListSearch/TopListSearch";
 import { CoursesList } from "../../components/CoursesList/CoursesList";
-
 import './CourseView.css'
 import { CreateCourseForm } from "../../components/CreateCourseForm/CreateCourseForm";
-
 
 export const CoursesView = () => {
 
@@ -25,5 +23,3 @@ export const CoursesView = () => {
         </div>
     );
 };
-
-

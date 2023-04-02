@@ -27,26 +27,28 @@ interface Props {
 }
 
 export const UnsubscribeStudentButton = ({ participant, refresh, course }: Props) => {
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const [loading, setLoading] = useState<boolean>(false);
 
+    const [loading, setLoading] = useState<boolean>(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast();
 
     const confirmUnsubscription = async () => {
         try {
             setLoading(true);
+
             if ( participant ) {
                 await api.unsubscribeStudentFromCourse(participant.id)
             } else if ( course ) {
                 await api.unsubscribeStudentFromCourse(course.id);
             }
-            refresh(prevState => ++prevState)
+
+            refresh(prevState => ++prevState);
             toast({
                 title: 'Sukces',
                 description: 'Uczestnik został wypisany',
                 status: 'success',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
         } catch (e) {
             toast({
@@ -54,10 +56,10 @@ export const UnsubscribeStudentButton = ({ participant, refresh, course }: Props
                 description: 'Nie można przetworzyć żądania. Spróbuj ponownie',
                 status: 'error',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     }
 
@@ -106,5 +108,3 @@ export const UnsubscribeStudentButton = ({ participant, refresh, course }: Props
         </>
     );
 };
-
-

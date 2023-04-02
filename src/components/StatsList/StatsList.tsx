@@ -41,7 +41,7 @@ export const StatsList = () => {
                     position: "top-right"
                 });
             }
-        })()
+        })();
     }, []);
 
     if ( !activeCourses || !activeStudents || !avgFrequency )

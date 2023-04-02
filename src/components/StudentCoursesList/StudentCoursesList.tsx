@@ -16,7 +16,7 @@ export const StudentCoursesList = ({ id }: Props) => {
     const [loading, setLoading] = useState(false);
     const [refresh, setRefresh] = useState<number>(0);
 
-    const toast = useToast()
+    const toast = useToast();
 
     useEffect(() => {
         (async () => {
@@ -33,17 +33,18 @@ export const StudentCoursesList = ({ id }: Props) => {
                     description: 'Nie udało się przetworzyć żądania. Spróbuj ponownie',
                     status: 'error',
                     duration: 4000,
-                    position: "top-right"
+                    position: "top-right",
                 });
             } finally {
                 setLoading(false);
             }
-        })()
+        })();
     }, [refresh]);
 
     if ( loading ) {
         return <Loader/>
     }
+
     return (
         <Card>
             <CardHeader>
@@ -53,7 +54,6 @@ export const StudentCoursesList = ({ id }: Props) => {
                     </Heading>
                     <SubscribeForm refresh={setRefresh}/>
                 </Flex>
-
             </CardHeader>
             <CardBody>
                 <UnorderedList spacing={5}>

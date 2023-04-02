@@ -15,13 +15,12 @@ export const CoursesList = ({ searchPhrase, refresh }: Props) => {
     const [fullCoursesList, setFullCoursesList] = useState<SimpleCourseEntity[] | []>([]);
     const [filteredCourseList, setFilteredCourseList] = useState<SimpleCourseEntity[] | []>([]);
     const [loading, setLoading] = useState<boolean>(false);
-    const toast = useToast()
+    const toast = useToast();
 
     useEffect(() => {
         (async () => {
             try {
-
-                setLoading(true)
+                setLoading(true);
                 const data = await api.getAllCourses();
                 setFullCoursesList(data);
                 setFilteredCourseList(data);
@@ -31,25 +30,22 @@ export const CoursesList = ({ searchPhrase, refresh }: Props) => {
                     description: e.message,
                     status: 'error',
                     duration: 4000,
-                    position: "top-right"
+                    position: "top-right",
                 });
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
-
-
-        })()
+        })();
     }, [refresh]);
 
     useEffect(() => {
         const searchResult = fullCoursesList.filter(course => {
-            const courseNameToLowerCase = course.name.toLowerCase()
-            const searchValueToLowerCase = searchPhrase.toLowerCase()
+            const courseNameToLowerCase = course.name.toLowerCase();
+            const searchValueToLowerCase = searchPhrase.toLowerCase();
 
-            return courseNameToLowerCase.includes(searchValueToLowerCase)
+            return courseNameToLowerCase.includes(searchValueToLowerCase);
         });
-        setFilteredCourseList(searchResult)
-
+        setFilteredCourseList(searchResult);
     }, [searchPhrase]);
 
 
@@ -66,8 +62,7 @@ export const CoursesList = ({ searchPhrase, refresh }: Props) => {
                             <Heading size='md'>
                                 <>
                                     {course.name}
-                                    {course.isActive ||
-                                        <Badge className="chips" colorScheme='red'>nieaktywny</Badge>}
+                                    {course.isActive || <Badge className="chips" colorScheme='red'>nieaktywny</Badge>}
                                 </>
                             </Heading>
                             {course.isActive
@@ -90,4 +85,3 @@ export const CoursesList = ({ searchPhrase, refresh }: Props) => {
         </Stack>
     );
 };
-

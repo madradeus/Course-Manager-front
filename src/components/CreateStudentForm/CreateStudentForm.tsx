@@ -31,16 +31,13 @@ interface Props {
 
 export const CreateStudentForm = ({ doRefresh }: Props) => {
 
-
     const { register, reset, formState: { errors }, handleSubmit } = useForm<NewStudentDto>();
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const [loading, setLoading] = useState<boolean>(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const toast = useToast();
-
 
     const addStudent = handleSubmit(async (data, e) => {
         e?.preventDefault();
-        console.log(data)
         try {
             setLoading(true);
             await api.addNewStudent(data);
@@ -49,7 +46,7 @@ export const CreateStudentForm = ({ doRefresh }: Props) => {
                 description: 'Kursant został utworzony',
                 status: 'success',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
             doRefresh(prevState => ++prevState);
         } catch (e) {
@@ -58,25 +55,24 @@ export const CreateStudentForm = ({ doRefresh }: Props) => {
                 description: 'Nie udało się przetworzyć żądania. Spróbuj ponownie',
                 status: 'error',
                 duration: 4000,
-                position: "top-right"
+                position: "top-right",
             });
         } finally {
             setLoading(false);
             CloseAndClearForm();
         }
-
     });
 
     const CloseAndClearForm = () => {
         onClose();
         reset();
     }
+
     return (
         <>
             <Button leftIcon={<AddIcon/>} colorScheme='teal' onClick={onOpen}>
                 Dodaj kursanta
             </Button>
-
             <Modal isOpen={isOpen} onClose={CloseAndClearForm} size='lg' isCentered={true}>
                 <ModalOverlay/>
                 <ModalContent>
@@ -168,10 +164,7 @@ export const CreateStudentForm = ({ doRefresh }: Props) => {
                                             <FormErrorMessage>{errors.emailAddress.message}</FormErrorMessage>}
                                     </FormLabel>
                                 </FormControl>
-
-
                             </Stack>
-
                         </ModalBody>
                         <ModalFooter>
                             <Button variant='ghost' onClick={CloseAndClearForm}>Anuluj </Button>
@@ -190,7 +183,6 @@ export const CreateStudentForm = ({ doRefresh }: Props) => {
                                         spinnerPlacement='start'
                                     />
                             }
-
                         </ModalFooter>
                     </form>
                 </ModalContent>
@@ -198,4 +190,3 @@ export const CreateStudentForm = ({ doRefresh }: Props) => {
         </>
     );
 };
-

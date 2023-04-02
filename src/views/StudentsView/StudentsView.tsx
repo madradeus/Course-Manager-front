@@ -11,12 +11,14 @@ export const StudentsView = () => {
     return (
         <div className="list">
             <div className="search-bar">
-                <TopListSearch placeholder="Wpisz nazwisko kursanta" searchValue={searchValue}
-                               onChange={setSearchValue}></TopListSearch>
+                <TopListSearch
+                    placeholder="Wpisz nazwisko kursanta"
+                    searchValue={searchValue}
+                    onChange={setSearchValue}
+                />
                 <CreateStudentForm doRefresh={setRefresh}/>
             </div>
             <StudentsList searchPhrase={searchValue} refresh={refresh}/>
         </div>
     );
 };
-

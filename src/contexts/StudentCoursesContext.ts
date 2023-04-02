@@ -15,7 +15,7 @@ const defaultContext: defaultContextInterface = {
         gender: 'male',
         emailAddress: '',
         firstName: '',
-        lastName: ''
+        lastName: '',
     },
     setStudent: () => {
         console.log('default fn')
@@ -32,4 +32,4 @@ const defaultContext: defaultContextInterface = {
     },
 }
 
-export const StudentCoursesContext = createContext(defaultContext)
+export const StudentCoursesContext = createContext(defaultContext);

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Card, CardBody, CardHeader, Flex, Heading, ListItem, OrderedList, useToast, } from "@chakra-ui/react";
-
 import { ParticipantOfCourse } from 'types';
 import { Loader } from "../common/Loader/Loader";
 import { api } from "../../libs/Api";
@@ -16,10 +15,9 @@ export const CourseParticipantList = () => {
     const [refresh, setRefresh] = useState<number>(0);
 
     const { id } = useParams() as {
-        id: string
+        id: string;
     }
     const toast = useToast();
-
 
     useEffect(() => {
         (async () => {
@@ -33,12 +31,12 @@ export const CourseParticipantList = () => {
                     description: 'Nie można wyswietlić kursu. Spróbuj ponownie',
                     status: 'error',
                     duration: 3000,
-                    position: "top-right"
+                    position: "top-right",
                 });
             } finally {
                 setLoading(false);
             }
-        })()
+        })();
     }, [refresh]);
 
     if ( loading ) {
@@ -57,7 +55,11 @@ export const CourseParticipantList = () => {
                 <OrderedList spacing={5}>
                     {
                         participants.map(participant => (
-                            <Flex key={participant.id} justify='space-between' align='center'>
+                            <Flex
+                                key={participant.id}
+                                justify='space-between'
+                                align='center'
+                            >
                                 <ListItem>
                                     <Avatar size='xs' marginX={5}/>
                                     {participant.firstName} {participant.lastName}

@@ -30,7 +30,7 @@ export const CourseDetails = () => {
     const [refresh, setRefresh] = useState<number>(0);
 
     const { id } = useParams() as {
-        id: string
+        id: string;
     };
     const toast = useToast();
 
@@ -38,21 +38,21 @@ export const CourseDetails = () => {
     useEffect(() => {
         (async () => {
             try {
-                setLoading(true)
+                setLoading(true);
                 const course = await api.getCourse(id);
-                setCourse(course)
+                setCourse(course);
             } catch (e) {
                 toast({
                     title: 'Błąd',
                     description: 'Nie można wyswietlić kursu. Spróbuj ponownie',
                     status: 'error',
                     duration: 3000,
-                    position: "top-right"
+                    position: "top-right",
                 });
             } finally {
-                setLoading(false)
+                setLoading(false);
             }
-        })()
+        })();
     }, [refresh]);
 
     const changeActivity = async () => {
@@ -66,12 +66,10 @@ export const CourseDetails = () => {
                 description: e.message,
                 status: 'error',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
             setLoading(false);
-
         }
-
     }
 
     if ( course === undefined ) {
@@ -79,11 +77,9 @@ export const CourseDetails = () => {
     }
 
     if ( course === null ) {
-        return (
-            <NotFoundView/>
-        )
-
+        return <NotFoundView/>
     }
+
     return (
         <>
             <Card>
@@ -95,7 +91,6 @@ export const CourseDetails = () => {
                             <Badge className='chips' ml={4} colorScheme='green'>Aktywny</Badge>
                             :
                             <Badge className='chips' ml={4} colorScheme='red'>Nieaktywny</Badge>
-
                         }
                     </Heading>
                 </CardHeader>
@@ -144,13 +139,9 @@ export const CourseDetails = () => {
                                     />
                             }
                         </CardFooter>
-
                     </Stack>
                 </CardBody>
             </Card>
-
-
         </>
     );
-
 }

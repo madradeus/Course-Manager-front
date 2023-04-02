@@ -1,8 +1,7 @@
 import React from 'react';
-
-import './NotFoundView.css'
 import { Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import './NotFoundView.css'
 
 export const NotFoundView = () => {
     return (
@@ -13,10 +12,7 @@ export const NotFoundView = () => {
                 <Link to='/dashboard'>
                     Wracam na stronę głowną
                 </Link>
-
             </Button>
         </div>
     );
 };
-
-

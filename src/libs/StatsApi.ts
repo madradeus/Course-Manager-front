@@ -2,14 +2,14 @@ import { GetActiveStudentsNumberResponse, GetNumberOfActiveCoursesResponse, GetT
 import { apiUrl } from "../config/api";
 
 class StatsApi {
-    url: string = `${apiUrl}/stats`
+    url: string = `${apiUrl}/stats`;
 
     async getActiveCoursesNumber(): Promise<GetNumberOfActiveCoursesResponse> {
         const res = await fetch(`${this.url}/active-courses`);
         if ( res.status !== 200 ) {
             throw new Error();
         }
-        return await res.json()
+        return await res.json();
     }
 
     async getActiveStudentsNumber(): Promise<GetActiveStudentsNumberResponse> {
@@ -17,7 +17,7 @@ class StatsApi {
         if ( res.status !== 200 ) {
             throw new Error();
         }
-        return await res.json()
+        return await res.json();
     }
 
     async getAvgFrequency(): Promise<GetTotalAvgFrequencyResponse> {
@@ -25,7 +25,7 @@ class StatsApi {
         if ( res.status !== 200 ) {
             throw new Error();
         }
-        return await res.json()
+        return await res.json();
     }
 }
 

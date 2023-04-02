@@ -24,38 +24,38 @@ interface Props {
 
 export const DeleteUserButton = ({ id }: Props) => {
 
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const [studentCourses, setStudentCourses] = useState<CourseOfStudent[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const navigate = useNavigate();
 
     const checkCourses = async () => {
         if ( !id ) {
-            return
+            return;
         }
-        setLoading(true)
+        setLoading(true);
         try {
-            const studentCourses = await api.getCoursesOfStudent(id)
-            setStudentCourses(studentCourses)
+            const studentCourses = await api.getCoursesOfStudent(id);
+            setStudentCourses(studentCourses);
         } catch (e: any) {
             toast({
                 title: 'Błąd',
                 description: e.message,
                 status: 'error',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
         } finally {
-            setLoading(false)
-            onOpen()
+            setLoading(false);
+            onOpen();
         }
     };
 
     const deleteStudent = async () => {
         setLoading(true)
         if ( !id ) {
-            return
+            return;
         }
         try {
             await api.deleteStudent(id)
@@ -64,7 +64,7 @@ export const DeleteUserButton = ({ id }: Props) => {
                 description: 'Kursant został usunięty',
                 status: 'success',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
         } catch (e: any) {
             toast({
@@ -72,13 +72,12 @@ export const DeleteUserButton = ({ id }: Props) => {
                 description: e.message,
                 status: 'error',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
         } finally {
-            setLoading(false)
-            navigate('/students')
+            setLoading(false);
+            navigate('/students');
         }
-
     }
 
     return (
@@ -148,5 +147,3 @@ export const DeleteUserButton = ({ id }: Props) => {
         </>
     );
 };
-
-

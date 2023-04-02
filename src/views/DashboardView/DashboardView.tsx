@@ -9,8 +9,5 @@ export const DashboardView = () => {
             <StatsList/>
             <BirthdayList/>
         </Stack>
-
     );
 };
-
-

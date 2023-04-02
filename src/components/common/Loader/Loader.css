@@ -4,7 +4,6 @@
     align-items: center;
     background-color: rgba(205, 199, 199, 0.15);
     backdrop-filter: blur(2px);
-    /*opacity: .5;*/
     height: 100vh;
     width: 100%;
     position: fixed;

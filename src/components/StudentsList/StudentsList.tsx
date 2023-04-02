@@ -8,7 +8,6 @@ import { Loader } from "../common/Loader/Loader";
 interface Props {
     searchPhrase: string;
     refresh: number;
-
 }
 
 export const StudentsList = ({ searchPhrase, refresh }: Props) => {
@@ -16,7 +15,6 @@ export const StudentsList = ({ searchPhrase, refresh }: Props) => {
     const [fullStudentsList, setFullStudentsList] = useState<null | SimpleStudentEntity[]>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [filteredStudentList, setFilteredStudentList] = useState<SimpleStudentEntity[] | []>([]);
-
     const toast = useToast();
 
     useEffect(() => {
@@ -32,7 +30,7 @@ export const StudentsList = ({ searchPhrase, refresh }: Props) => {
                     description: e.message,
                     status: 'error',
                     duration: 4000,
-                    position: "top-right"
+                    position: "top-right",
                 });
             } finally {
                 setLoading(false)
@@ -57,6 +55,7 @@ export const StudentsList = ({ searchPhrase, refresh }: Props) => {
     if ( loading ) {
         return <Loader/>
     }
+
     return (
         <Card>
             <CardHeader>
@@ -70,4 +69,3 @@ export const StudentsList = ({ searchPhrase, refresh }: Props) => {
         </Card>
     );
 };
-

@@ -10,8 +10,8 @@ export const SingleStudentView = () => {
 
     const [student, setStudent] = useState<null | StudentEntity>(null);
     const [studentCourses, setStudentCourses] = useState<CourseOfStudent[] | []>([]);
+    const { id } = useParams();
 
-    const { id } = useParams()
     return (
         <StudentCoursesContext.Provider value={{
             student,
@@ -23,9 +23,6 @@ export const SingleStudentView = () => {
                 <StudentDetails id={id}/>
                 <StudentCoursesList id={id}/>
             </Stack>
-
         </StudentCoursesContext.Provider>
     );
 };
-
-

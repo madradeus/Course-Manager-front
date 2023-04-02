@@ -25,7 +25,6 @@ import { useForm } from "react-hook-form";
 
 interface Props {
     refresh: Dispatch<SetStateAction<number>>;
-
 }
 
 export const SubscribeForm = ({ refresh }: Props) => {
@@ -48,7 +47,7 @@ export const SubscribeForm = ({ refresh }: Props) => {
                 }).length === 0
             });
             setAvailableCoursesList(filteredCourseList)
-        })()
+        })();
     }, []);
 
     const addCourseRecord = handleSubmit(async (data, e) => {
@@ -65,29 +64,26 @@ export const SubscribeForm = ({ refresh }: Props) => {
                 description: 'Kursant został zapisany',
                 status: 'success',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
-            refresh(prevState => ++prevState)
+            refresh(prevState => ++prevState);
         } catch (e: any) {
             toast({
                 title: 'Błąd',
                 description: e.message,
                 status: 'error',
                 duration: 4000,
-                position: "top-right"
+                position: "top-right",
             });
         } finally {
             setLoading(false);
             CloseAndClearForm();
-
         }
-
     });
 
     const CloseAndClearForm = () => {
         reset();
         onClose();
-
     };
 
     return (
@@ -95,8 +91,13 @@ export const SubscribeForm = ({ refresh }: Props) => {
             <Button leftIcon={<AddIcon/>} colorScheme='teal' onClick={onOpen}>
                 Nowy kurs
             </Button>
-
-            <Modal isOpen={isOpen} onClose={CloseAndClearForm} closeOnOverlayClick={false} size='lg' isCentered={true}>
+            <Modal
+                isOpen={isOpen}
+                onClose={CloseAndClearForm}
+                closeOnOverlayClick={false}
+                size='lg'
+                isCentered={true}
+            >
                 <ModalOverlay/>
                 <ModalContent>
                     <form onSubmit={addCourseRecord}>
@@ -112,13 +113,12 @@ export const SubscribeForm = ({ refresh }: Props) => {
                                                 {...register('studentId')
                                                 }
                                         >
-                                            <option
-                                                value={student?.id}>{student?.firstName} {student?.lastName}
+                                            <option value={student?.id}>
+                                                {student?.firstName} {student?.lastName}
                                             </option>
                                         </Select>
                                     </FormLabel>
                                 </FormControl>
-
                                 <FormControl isInvalid={!!errors.courseId}>
                                     <FormLabel>
                                         <Text mb='8px'>Kurs:</Text>
@@ -164,4 +164,3 @@ export const SubscribeForm = ({ refresh }: Props) => {
         </>
     );
 };
-

@@ -45,5 +45,3 @@ export default function SimpleSidebar({ children }: { children: ReactNode }) {
         </Box>
     );
 }
-
-

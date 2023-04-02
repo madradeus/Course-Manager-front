@@ -28,53 +28,50 @@ import { Loader } from "../common/Loader/Loader";
 
 
 interface Props {
-    doRefresh: Dispatch<SetStateAction<number>>
+    doRefresh: Dispatch<SetStateAction<number>>;
 }
 
 export const CreateCourseForm = ({ doRefresh }: Props) => {
 
     const { register, reset, formState: { errors }, handleSubmit } = useForm<NewCourseDto>();
-    const toast = useToast()
-    const { isOpen, onOpen, onClose } = useDisclosure();
     const [loading, setLoading] = useState<boolean>(false);
+    const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
 
     const addCourse = async (e: BaseSyntheticEvent | undefined, data: NewCourseDto) => {
         e?.preventDefault();
         setLoading(true);
         try {
-            await api.addNewCourse(data)
+            await api.addNewCourse(data);
             toast({
                 title: 'Sukces',
                 description: 'Kurs został utworzony',
                 status: 'success',
                 duration: 3000,
-                position: "top-right"
+                position: "top-right",
             });
-            doRefresh(prevState => ++prevState)
+            doRefresh(prevState => ++prevState);
         } catch (e) {
             toast({
                 title: 'Błąd',
                 description: 'Nie udało się przetworzyć żądania. Spróbuj ponownie',
                 status: 'error',
                 duration: 4000,
-                position: "top-right"
+                position: "top-right",
             });
-
         } finally {
             setLoading(false);
             CloseAndClearForm();
         }
-
-
     };
 
-    const onSubmit = handleSubmit((data, e) => addCourse(e, data))
+    const onSubmit = handleSubmit((data, e) => addCourse(e, data));
+
     const CloseAndClearForm = () => {
         onClose();
         reset();
     }
-
 
     if ( loading ) {
 
@@ -172,5 +169,3 @@ export const CreateCourseForm = ({ doRefresh }: Props) => {
         </>
     )
 };
-
-

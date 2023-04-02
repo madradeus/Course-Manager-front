@@ -24,18 +24,15 @@ interface Props {
 export const StudentDetails = ({ id }: Props) => {
 
     const { setStudent, student } = useContext(StudentCoursesContext);
-    // const [student, setStudent] = useState<null | StudentEntity>(null);
     const [loading, setLoading] = useState(false);
-
     const toast = useToast();
-
 
     useEffect(() => {
         (async () => {
             try {
                 setLoading(true);
                 if ( !id ) {
-                    return
+                    return;
                 }
                 const studentData = await api.getStudent(id);
                 setStudent(studentData);
@@ -45,28 +42,30 @@ export const StudentDetails = ({ id }: Props) => {
                     description: 'Nie udało się przetworzyć żądania. Spróbuj ponownie',
                     status: 'error',
                     duration: 4000,
-                    position: "top-right"
+                    position: "top-right",
                 });
             } finally {
                 setLoading(false);
             }
-        })()
+        })();
     }, []);
-
 
     if ( loading || !student ) {
         return <Loader/>
     }
+
     return (
         <Card>
             <CardHeader>
-                <Heading>{student.firstName} {student.lastName} {student.gender === 'male' ? '🙎' : '👩🏼'}</Heading>
+                <Heading>
+                    {student.firstName} {student.lastName}{student.gender === 'male' ? '🙎' : '👩🏼'}
+                </Heading>
             </CardHeader>
             <CardBody>
                 <Flex>
                     <Container maxW='md'>
                         <FormLabel>
-                            <Text fontWeight="bold" mb='8px'>Wiek: </Text>
+                            <Text fontWeight="bold" mb='8px'>Wiek:</Text>
                         </FormLabel>
                         <Text>{getAge(student.dateOfBirth)}</Text>
                     </Container>
@@ -80,11 +79,7 @@ export const StudentDetails = ({ id }: Props) => {
             </CardBody>
             <CardFooter justifyContent={'flex-end'}>
                 <DeleteUserButton id={id}/>
-
             </CardFooter>
         </Card>
-
-
     )
 };
-

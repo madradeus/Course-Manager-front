@@ -24,7 +24,7 @@ export const BirthdayList = () => {
                     description: 'Nie udało się przetworzyć żądania. Spróbuj ponownie',
                     status: 'error',
                     duration: 4000,
-                    position: "top-right"
+                    position: "top-right",
                 });
             } finally {
                 setLoading(false);
