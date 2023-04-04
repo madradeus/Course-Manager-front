@@ -1,46 +1,143 @@
-# Getting Started with Create React App
+# Course Manager
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+1. [About the Project](#About-the-Project)
+    1. [Demo](#Demo)
+    2. [Features](#Features)
+    3. [Tech Stack](#Tech-Stack)
+    4. [Roadmap](#Roadmap)
+2. [Getting Started](#Getting-Started)
+3. [Contact](#Contact)
 
-In the project directory, you can run:
+## 📙About the Project
+
+This project is an application created to manage courses and their participants. It
+can be useful for all kinds of coaches, instructors and teachers.
+
+Main goals of this project was to practice making full-stack application with React.js and Node.js, and working with
+MySQL database.
+
+Front-end repository - https://github.com/madradeus/Course-Manager-front
+
+### 👓Demo
+
+Demo link
+![img_1.png](screens/add-new-course.png)
+![img_2.png](screens/subscribe.png)
+![img_3.png](screens/students-list.png)
+![img_4.png](screens/stats.png)
+![img_5.png](screens/login-page.png)
+
+### 🎆‍Features
+
+- listing courses with filter,
+- single course details,
+- creating new course,
+- activating/deactivating course,
+- listing students with filter,
+- single student details,
+- creating new students,
+- removing students,
+- subscribe/unsubscribe,
+- stats,
+- login/logout,
+
+### 🧑‍💻Tech Stack
+
+- typescript 4.9.5,
+- express 4.18.2,
+- jsonwebtoken 9.0.0,
+- mysql2 3.1.0,
+- jest 29.4.2,
+
+### ⏩Roadmap
+
+- attendance list,
+- payments monitor & notifications,
+
+## 🚀Getting Started
+
+Clone the project
+
+### `git clone https://github.com/madradeus/Course-Manager-back.git`
+
+Install dependencies
+
+### `npm install`
+
+Start the server development
 
 ### `npm start`
 
-Runs the app in the development mode.\
+Start the watch mode
+
+### `npm run start:dev`
+
+Open http://localhost:3000 to view it in the browser.
+
+## 🤝Contact
+
+[Mateusz Rodowski](mailto:mateusz.rodowski@gmail.com?subject=[GitHub]) |
+mateusz.rodowski@gmail.com
+Back-end repository
+
+- [https://github.com/madradeus/Course-Manager-back](https://github.com/madradeus/Course-Manager-back)
+
+### 👓Demo
+
+Demo link
+![img_4.png](screens/stats.png)
+![img_3.png](screens/students-list.png)
+![img_1.png](screens/add-new-course.png)
+![img_2.png](screens/sunscribe-view.png)
+![img_4.png](screens/login-page.png)
+
+### 🎆‍Features
+
+- listing courses with filter,
+- single course details,
+- creating new course,
+- activating/deactivating course,
+- listing students with filter,
+- single student details,
+- creating new students,
+- removing students,
+- subscribe/unsubscribe,
+- stats,
+- login/logout,
+
+### 🧑‍💻Tech Stack
+
+- typescript 4.9.5,
+- react: 18.2.0,
+- react-hook-form: 7.43.3,
+- react-router-dom: 6.8.2,
+- axios": 1.3.4,
+- chakra-ui/react 2.5.1,
+
+### ⏩Roadmap
+
+- attendance list,
+- payments monitor & notifications,
+
+## 🚀Getting Started
+
+Clone the project
+
+#### `git clone https://github.com/madradeus/Course-Manager-front.git`
+
+Install dependencies
+
+#### `npm install`
+
+Start the server
+
+#### `npm start`
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🤝Contact
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Mateusz Rodowski](mailto:mateusz.rodowski@gmail.com?subject=[GitHub]) |
+mateusz.rodowski@gmail.com
