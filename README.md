@@ -18,7 +18,7 @@ can be useful for all kinds of coaches, instructors and teachers.
 Main goals of this project was to practice making full-stack application with React.js and Node.js, and working with
 MySQL database.
 
-Front-end repository - https://github.com/madradeus/Course-Manager-front
+Front-end repository - https://github.com/madradeus/Course-Manager-back.git
 
 ### 👓Demo
 
@@ -46,10 +46,11 @@ Demo link
 ### 🧑‍💻Tech Stack
 
 - typescript 4.9.5,
-- express 4.18.2,
-- jsonwebtoken 9.0.0,
-- mysql2 3.1.0,
-- jest 29.4.2,
+- react: 18.2.0,
+- react-hook-form: 7.43.3,
+- react-router-dom: 6.8.2,
+- axios": 1.3.4,
+- chakra-ui/react 2.5.1,
 
 ### ⏩Roadmap
 
