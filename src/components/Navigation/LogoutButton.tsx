@@ -36,6 +36,6 @@ export const LogoutButton = () => {
         return <Loader/>
     }
     return (
-        <NavItem icon={FiLogOut} link='' onClick={logout}>Wyloguj</NavItem>
+        <NavItem mt={10} icon={FiLogOut} link='' onClick={logout}>Wyloguj</NavItem>
     );
 };

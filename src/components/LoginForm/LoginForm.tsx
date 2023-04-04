@@ -50,7 +50,7 @@ export const LoginForm = () => {
             <Card size='sm' align='center' justify='center' className="login-form">
                 <form onSubmit={login}>
                     <Stack spacing={5}>
-                        <Text fontSize='4xl'>Course Manager</Text>
+                        <Text fontSize='3xl'>Course Manager</Text>
                         <FormControl isInvalid={!!errors.email}>
                             <FormLabel>
                                 <Input
