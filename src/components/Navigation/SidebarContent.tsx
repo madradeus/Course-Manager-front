@@ -2,6 +2,7 @@ import { Box, BoxProps, CloseButton, Flex, Text, useColorModeValue } from "@chak
 import React from "react";
 import { NavItem } from "./NavItem";
 import { LinkItems } from "./Nav";
+import { LogoutButton } from "./LogoutButton";
 
 interface SidebarProps extends BoxProps {
     onClose: () => void;
@@ -28,6 +29,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                     {link.name}
                 </NavItem>
             ))}
+            <LogoutButton/>
         </Box>
     );
 };

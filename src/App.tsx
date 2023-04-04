@@ -9,11 +9,13 @@ import { DashboardView } from "./views/DashboardView/DashboardView";
 import { StudentsView } from "./views/StudentsView/StudentsView";
 import { SingleStudentView } from "./views/SingleStudentView/SingleStudentView";
 import './App.css';
+import { LoginPageView } from "./views/LoginPageView/LoginPageView";
 
 export function App() {
     return (
         <ChakraProvider>
             <Routes>
+                <Route path='/' element={<LoginPageView/>}/>
                 <Route path='/dashboard' element={<SimpleSidebar children={<DashboardView/>}/>}/>
                 <Route path='/courses' element={<SimpleSidebar children={<CoursesView/>}/>}/>
                 <Route path='/courses/:id' element={<SimpleSidebar children={<SingleCourseView/>}/>}/>

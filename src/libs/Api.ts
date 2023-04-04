@@ -1,6 +1,8 @@
 import {
     CourseEntity,
     CourseOfStudent,
+    CourseUpdateResponse,
+    LoginUserDto,
     NewCourseDto,
     NewStudentDto,
     ParticipantOfCourse,
@@ -9,149 +11,145 @@ import {
     StudentCourseDto,
     StudentEntity
 } from "types";
-import { apiUrl } from "../config/api";
+import { myApi } from "../utils/interceptor";
 
 export class Api {
-    private url: string = apiUrl;
 
     async getAllCourses(): Promise<SimpleCourseEntity[] | []> {
-        const res = await fetch(`${this.url}/courses`);
-        if ( res.status !== 200 ) {
-            throw new Error(res.statusText);
-        }
-        return await res.json() as CourseEntity[];
+        const { data } = await myApi
+            .get(`courses`, {
+                withCredentials: true,
+            });
+        return data as SimpleCourseEntity[] | [];
+
     }
 
+
     async getCourse(courseId: string): Promise<CourseEntity | null> {
-        const res = await fetch(`${this.url}/courses/${courseId}`);
-        if ( res.status !== 200 ) {
-            throw new Error(res.statusText);
-        }
-        return await res.json() as CourseEntity | null;
+        const { data } = await myApi
+            .get(`courses/${courseId}`, {
+                withCredentials: true,
+            });
+        return data as CourseEntity | null;
+
     }
 
     async addNewCourse(course: NewCourseDto): Promise<string> {
-        const res = await fetch(`${this.url}/courses`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(course),
-        })
-        if ( res.status !== 201 ) {
-            throw new Error(res.statusText);
-        }
-
-        return await res.json() as string;
+        const { data } = await myApi
+            .post('/courses', JSON.stringify(course), {
+                headers: {
+                    'content-type': 'application/json',
+                },
+                withCredentials: true
+            });
+        return data as string;
     }
 
-    async changeActivity(id: string): Promise<void> {
-        const res = await fetch(`${this.url}/courses/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json',
-            },
-        });
-        if ( res.status !== 200 ) {
-            throw new Error(res.statusText);
-        }
+    async changeActivity(id: string): Promise<CourseUpdateResponse> {
+        const { data } = await myApi
+            .patch(`/courses/${id}`, null, {
+                withCredentials: true
+            });
+        return data as CourseUpdateResponse;
     }
 
     async getAllStudents(): Promise<SimpleStudentEntity[]> {
-        const res = await fetch(`${this.url}/students`);
-        if ( res.status !== 200 ) {
-            throw new Error(res.statusText);
-        }
-        return await res.json() as SimpleStudentEntity[];
+        const { data } = await myApi
+            .get('/students', {
+                withCredentials: true
+            });
+        return data as SimpleStudentEntity[];
+
     }
 
     async getStudent(id: string): Promise<StudentEntity | null> {
-        const res = await fetch(`${this.url}/students/${id}`);
-        if ( res.status !== 200 ) {
-            throw new Error(res.statusText);
-        }
-        const data = await res.json();
+        const { data } = await myApi
+            .get(`/students/${id}`, {
+                withCredentials: true
+            });
         return data === null
             ? null
             : {
                 ...data,
                 dateOfBirth: new Date(data.dateOfBirth)
-            }
+            } as StudentEntity;
     }
 
     async addNewStudent(student: NewStudentDto): Promise<string> {
-        const res = await fetch(`${this.url}/students`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(student)
-        });
-        if ( res.status !== 201 ) {
-            throw new Error(res.statusText);
-        }
-
-        return await res.json();
+        const { data } = await myApi
+            .post('/students', JSON.stringify(student), {
+                headers: {
+                    'content-type': 'application/json',
+                },
+                withCredentials: true
+            });
+        return data as string;
     }
 
     async getBirthdayStudents(): Promise<SimpleStudentEntity[] | []> {
-        const res = await fetch(`${this.url}/students/birthday-students`);
-        if ( res.status !== 200 ) {
-            throw new Error(res.statusText);
-        }
-
-        return await res.json();
+        const { data } = await myApi
+            .get('/students/birthday-students', {
+                withCredentials: true,
+            });
+        return data as SimpleStudentEntity[] | [];
     }
 
     async getCoursesOfStudent(studentId: string): Promise<CourseOfStudent[] | []> {
-        const res = await fetch(`${this.url}/studentsCourses/list-courses/${studentId}`);
-        if ( res.status !== 200 ) {
-            throw new Error();
-        }
-        return await res.json();
-
+        const { data } = await myApi
+            .get(`/studentsCourses/list-courses/${studentId}`, {
+                withCredentials: true,
+            });
+        return data as CourseOfStudent[] | [];
     }
 
     async getParticipantsOfCourse(courseId: string): Promise<ParticipantOfCourse[] | []> {
-        const res = await fetch(`${this.url}/studentsCourses/list-students/${courseId}`);
-        if ( res.status !== 200 ) {
-            throw new Error();
-        }
-        return await res.json();
+        const { data } = await myApi
+            .get(`/studentsCourses/list-students/${courseId}`, {
+                withCredentials: true,
+            });
+        return data as ParticipantOfCourse[] | [];
     }
 
     async unsubscribeStudentFromCourse(subscriptionId: string): Promise<void> {
-        const res = await fetch(`${this.url}/studentsCourses/${subscriptionId}`, {
-            method: 'DELETE'
-        })
-        if ( res.status !== 200 ) {
-            throw new Error(res.statusText);
-        }
+        await myApi
+            .delete(`/studentsCourses/${subscriptionId}`, {
+                withCredentials: true,
+            });
     }
 
-    async subscribeStudent(studentCourse: StudentCourseDto): Promise<void> {
-        const res = await fetch(`${this.url}/studentsCourses`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(studentCourse)
-        })
-        if ( res.status !== 201 ) {
-            throw new Error(res.statusText);
-        }
+    async subscribeStudent(studentCourse: StudentCourseDto): Promise<string> {
+        const { data } = await myApi
+            .post(`/studentsCourses`, JSON.stringify(studentCourse), {
+                headers: {
+                    "content-type": "application/json"
+                },
+                withCredentials: true
+            });
+        return data as string;
     }
 
     async deleteStudent(id: string): Promise<void> {
-        const res = await fetch(`${this.url}/students/${id}`, {
-            method: "DELETE"
-        })
-
-        if ( res.status !== 204 ) {
-            throw new Error
-        }
+        await myApi
+            .delete(`/students/${id}`, {
+                withCredentials: true,
+            });
     }
 
+    async login(user: LoginUserDto): Promise<void> {
+        await myApi.post('/auth/login', JSON.stringify(user), {
+            headers: {
+                "content-type": "application/json"
+            },
+            withCredentials: true
+        });
+    }
+
+    async logout(): Promise<void> {
+        await myApi
+            .get('/auth/logout', {
+                withCredentials: true,
+            });
+    }
 }
 
 export const api = new Api();
