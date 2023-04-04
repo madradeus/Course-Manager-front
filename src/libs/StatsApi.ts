@@ -1,37 +1,45 @@
 import { GetActiveStudentsNumberResponse, GetNumberOfActiveCoursesResponse, GetTotalAvgFrequencyResponse } from "types";
 import { apiUrl } from "../config/api";
+import { myApi } from "../utils/interceptor";
 
 class StatsApi {
     url: string = `${apiUrl}/stats`;
+    private errorMessage = 'Nie udało się przetworzyć żądania, Spróbuj ponownie';
 
     async getActiveCoursesNumber(): Promise<GetNumberOfActiveCoursesResponse> {
-        const res = await fetch(`${this.url}/active-courses`, {
-            credentials: "include",
-        });
-        if ( res.status !== 200 ) {
-            throw new Error();
-        }
-        return await res.json();
+        const { data } = await myApi
+            .get('/stats/active-courses', {
+                withCredentials: true,
+            })
+            .catch(e => {
+                console.error(e);
+                throw new Error(this.errorMessage);
+            });
+        return data as GetNumberOfActiveCoursesResponse;
     }
 
     async getActiveStudentsNumber(): Promise<GetActiveStudentsNumberResponse> {
-        const res = await fetch(`${this.url}/active-students`, {
-            credentials: "include",
-        });
-        if ( res.status !== 200 ) {
-            throw new Error();
-        }
-        return await res.json();
+        const { data } = await myApi
+            .get('/stats/active-students', {
+                withCredentials: true,
+            })
+            .catch(e => {
+                console.error(e);
+                throw new Error(this.errorMessage);
+            });
+        return data as GetActiveStudentsNumberResponse;
     }
 
     async getAvgFrequency(): Promise<GetTotalAvgFrequencyResponse> {
-        const res = await fetch(`${this.url}/avg-frequency`, {
-            credentials: "include",
-        });
-        if ( res.status !== 200 ) {
-            throw new Error();
-        }
-        return await res.json();
+        const { data } = await myApi
+            .get('/stats/avg-frequency', {
+                withCredentials: true,
+            })
+            .catch(e => {
+                console.error(e);
+                throw new Error(this.errorMessage);
+            });
+        return data as GetTotalAvgFrequencyResponse;
     }
 }
 
