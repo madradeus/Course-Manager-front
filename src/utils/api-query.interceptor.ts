@@ -6,9 +6,17 @@ export const myApi = axios.create({
     baseURL: apiUrl
 });
 
+myApi.interceptors.request.use(function (config) {
+    config.withCredentials = true;
+    return config;
+}, function (error) {
+    return Promise.reject(error);
+});
+
+
 myApi.interceptors.response.use(undefined, async (err) => {
     const status = err.response ? err.response.status : null;
-    if ( status === 403 ) {
+    if ( [401, 403].includes(status) ) {
         window.location.href = '/';
         await api.logout();
     } else {
