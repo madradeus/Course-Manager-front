@@ -24,7 +24,7 @@ Front-end repository - https://github.com/madradeus/Course-Manager-back.git
 
 Demo link
 ![img_1.png](screens/add-new-course.png)
-![img_2.png](screens/subscribe.png)
+![img_2.png](screens/subscribe-view.png)
 ![img_3.png](screens/students-list.png)
 ![img_4.png](screens/stats.png)
 ![img_5.png](screens/login-page.png)
@@ -91,7 +91,7 @@ Demo link
 ![img_4.png](screens/stats.png)
 ![img_3.png](screens/students-list.png)
 ![img_1.png](screens/add-new-course.png)
-![img_2.png](screens/sunscribe-view.png)
+![img_2.png](screens/subscribe-view.png)
 ![img_4.png](screens/login-page.png)
 
 ### 🎆‍Features
