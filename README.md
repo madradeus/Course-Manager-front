@@ -22,6 +22,15 @@ Front-end repository - https://github.com/madradeus/Course-Manager-back.git
 
 ### 👓Demo
 
+DEMO version available at **https://course-manager-m.networkmanager.pl/**
+
+Please use the following credentials to log in:
+
+```
+email: tester@test.pl 
+password: Abc123
+```
+
 Demo link
 ![img_1.png](screens/add-new-course.png)
 ![img_2.png](screens/subscribe-view.png)
