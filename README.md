@@ -31,7 +31,6 @@ email: tester@test.pl
 password: Abc123
 ```
 
-Demo link
 ![img_1.png](screens/add-new-course.png)
 ![img_2.png](screens/subscribe-view.png)
 ![img_3.png](screens/students-list.png)
