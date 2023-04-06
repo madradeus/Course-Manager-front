@@ -8,6 +8,7 @@ export const myApi = axios.create({
 
 myApi.interceptors.request.use(function (config) {
     config.withCredentials = true;
+    config.headers["Access-Control-Allow-Credentials"] = true;
     return config;
 }, function (error) {
     return Promise.reject(error);
@@ -19,6 +20,8 @@ myApi.interceptors.response.use(undefined, async (err) => {
     if ( [401, 403].includes(status) ) {
         window.location.href = '/';
         await api.logout();
+    } else if ( status === 400 ) {
+        throw new Error(err.response.data.message)
     } else {
         throw new Error('Nie udało się przetworzyć żądania, Spróbuj ponownie')
     }
