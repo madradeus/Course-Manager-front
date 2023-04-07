@@ -1,0 +1,12 @@
+.list {
+    max-width: 70%;
+    margin: 0 auto
+}
+
+.overflow > p {
+    text-overflow: ellipsis;
+}
+
+.chips {
+    margin-left: 5px;
+}

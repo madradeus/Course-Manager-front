@@ -1,11 +1,10 @@
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #F0F3F4 !important;
+    margin: 0;
+    padding: 0;
+    background-color: #F0F3F4 !important;
 }
 
-
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
